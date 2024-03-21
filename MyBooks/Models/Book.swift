@@ -11,16 +11,18 @@ import SwiftData
 //将其声明为 SwiftData 模型
 @Model
 class Book {
-    var title: String
-    var author: String
-    var dateAdded: Date
-    var dateStarted: Date
-    var dateCompleted: Date
+    var title: String = ""
+    var author: String = ""
+    var dateAdded: Date = Date.now
+    var dateStarted: Date = Date.distantPast
+    var dateCompleted: Date = Date.distantPast
     @Attribute(originalName: "summary")
-    var comment: String
+    var comment: String = ""
     var rating: Int?
-    var status: Status.RawValue
+    var status: Status.RawValue = Status.onShelf.rawValue
     var recommendedBy: String = ""
+    
+    //if you want to use the cloudkit, all relation should be optional.
     @Relationship(deleteRule: .cascade)
     var quotes: [Quote]?
     
@@ -69,7 +71,7 @@ enum Status: Int, Codable, Identifiable, CaseIterable {
         self
     }
     
-    var descr: String {
+    var descr: LocalizedStringResource {
         switch self {
         case .onShelf:
             "On Shelf"

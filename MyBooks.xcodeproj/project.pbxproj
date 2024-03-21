@@ -17,6 +17,7 @@
 		196B195B2BA83B9300F223A9 /* GenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196B195A2BA83B9300F223A9 /* GenresView.swift */; };
 		196B195D2BA874FB00F223A9 /* NewGenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196B195C2BA874FB00F223A9 /* NewGenreView.swift */; };
 		196B19602BA87EB700F223A9 /* GenresStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196B195F2BA87EB700F223A9 /* GenresStackView.swift */; };
+		196B19622BA9E51300F223A9 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 196B19612BA9E51300F223A9 /* Localizable.xcstrings */; };
 		197840C02BA3EE26007E047E /* MyBooksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197840BF2BA3EE26007E047E /* MyBooksApp.swift */; };
 		197840C22BA3EE26007E047E /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197840C12BA3EE26007E047E /* BookListView.swift */; };
 		197840C42BA3EE27007E047E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 197840C32BA3EE27007E047E /* Assets.xcassets */; };
@@ -27,6 +28,8 @@
 		197840D42BA429FF007E047E /* RatingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197840D32BA429FF007E047E /* RatingsView.swift */; };
 		197840D82BA495EA007E047E /* BookSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197840D72BA495EA007E047E /* BookSamples.swift */; };
 		197840DA2BA496F7007E047E /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197840D92BA496F7007E047E /* PreviewContainer.swift */; };
+		1999C97A2BAB18BB0078BC8C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1999C9792BAB18BB0078BC8C /* Launch Screen.storyboard */; };
+		19AE1AE62BAB1C5B00C5313A /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 19AE1AE52BAB1C5B00C5313A /* InfoPlist.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,7 @@
 		196B195A2BA83B9300F223A9 /* GenresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresView.swift; sourceTree = "<group>"; };
 		196B195C2BA874FB00F223A9 /* NewGenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGenreView.swift; sourceTree = "<group>"; };
 		196B195F2BA87EB700F223A9 /* GenresStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresStackView.swift; sourceTree = "<group>"; };
+		196B19612BA9E51300F223A9 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		197840BC2BA3EE26007E047E /* MyBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		197840BF2BA3EE26007E047E /* MyBooksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksApp.swift; sourceTree = "<group>"; };
 		197840C12BA3EE26007E047E /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
@@ -51,6 +55,10 @@
 		197840D32BA429FF007E047E /* RatingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsView.swift; sourceTree = "<group>"; };
 		197840D72BA495EA007E047E /* BookSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSamples.swift; sourceTree = "<group>"; };
 		197840D92BA496F7007E047E /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
+		1999C9792BAB18BB0078BC8C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		19AE1AE52BAB1C5B00C5313A /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		19AE1AE72BAB2F7300C5313A /* MyBooks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyBooks.entitlements; sourceTree = "<group>"; };
+		19AE1AE82BAB305400C5313A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +118,9 @@
 		197840B32BA3EE26007E047E = {
 			isa = PBXGroup;
 			children = (
+				1999C9792BAB18BB0078BC8C /* Launch Screen.storyboard */,
+				196B19612BA9E51300F223A9 /* Localizable.xcstrings */,
+				19AE1AE52BAB1C5B00C5313A /* InfoPlist.xcstrings */,
 				197840BE2BA3EE26007E047E /* MyBooks */,
 				197840BD2BA3EE26007E047E /* Products */,
 			);
@@ -126,10 +137,13 @@
 		197840BE2BA3EE26007E047E /* MyBooks */ = {
 			isa = PBXGroup;
 			children = (
+				19AE1AE82BAB305400C5313A /* Info.plist */,
+				19AE1AE72BAB2F7300C5313A /* MyBooks.entitlements */,
 				197840BF2BA3EE26007E047E /* MyBooksApp.swift */,
 				196B194F2BA81E8100F223A9 /* Views */,
 				196B19502BA81EB700F223A9 /* Models */,
 				196B19532BA8333800F223A9 /* Extensions */,
+				19AE1AED2BAC829900C5313A /* Previews */,
 				197840C32BA3EE27007E047E /* Assets.xcassets */,
 				197840C52BA3EE27007E047E /* Preview Content */,
 			);
@@ -140,11 +154,18 @@
 			isa = PBXGroup;
 			children = (
 				197840C62BA3EE27007E047E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		19AE1AED2BAC829900C5313A /* Previews */ = {
+			isa = PBXGroup;
+			children = (
 				197840D72BA495EA007E047E /* BookSamples.swift */,
 				197840D92BA496F7007E047E /* PreviewContainer.swift */,
 				196B19582BA83A0200F223A9 /* GenreSamples.swift */,
 			);
-			path = "Preview Content";
+			path = Previews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +210,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 197840B32BA3EE26007E047E;
 			productRefGroup = 197840BD2BA3EE26007E047E /* Products */;
@@ -206,7 +228,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				197840C72BA3EE27007E047E /* Preview Assets.xcassets in Resources */,
+				19AE1AE62BAB1C5B00C5313A /* InfoPlist.xcstrings in Resources */,
 				197840C42BA3EE27007E047E /* Assets.xcassets in Resources */,
+				1999C97A2BAB18BB0078BC8C /* Launch Screen.storyboard in Resources */,
+				196B19622BA9E51300F223A9 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,15 +390,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyBooks/MyBooks.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyBooks/Preview Content\"";
 				DEVELOPMENT_TEAM = T9JHM99P78;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyBooks/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -394,15 +422,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyBooks/MyBooks.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyBooks/Preview Content\"";
 				DEVELOPMENT_TEAM = T9JHM99P78;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyBooks/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

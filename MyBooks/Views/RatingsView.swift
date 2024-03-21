@@ -58,7 +58,7 @@ public struct RatingsView: View {
                     .foregroundStyle(Color(color))
                     .onTapGesture {
                         withAnimation{
-                            currentRating = rating + 1
+                            currentRating = rating //原来 rating + 1
                         }
                     }
             }
@@ -66,11 +66,10 @@ public struct RatingsView: View {
     }
     
     func correctImage(for rating: Int) -> Bool {
-        if let currentRating, rating < currentRating {
-            return true
-        } else {
-            return false
+        guard let currentRating else {
+            return false // Return false if currentRating is nil
         }
+        return rating <= currentRating // Return true if the rating is less than or equal to the currentRating
     }
 }
 
@@ -94,7 +93,7 @@ extension View {
 
 #Preview {
     struct PreviewWrapper: View {
-        @State var currentRating: Int? = 3
+        @State var currentRating: Int? = 0
         
         var body: some View {
             RatingsView(

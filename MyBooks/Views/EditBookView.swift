@@ -10,7 +10,7 @@ import SwiftUI
 struct EditBookView: View {
     @Environment(\.dismiss) private var dismiss
     let book: Book
-    @State private var status = Status.onShelf
+    @State private var status: Status
     @State private var rating: Int?
     @State private var title = ""
     @State private var author = ""
@@ -18,50 +18,60 @@ struct EditBookView: View {
     @State private var dateAdded = Date.distantPast
     @State private var dateStarted = Date.distantPast
     @State private var dateCompleted = Date.distantPast
-    @State private var firstView = true
     @State private var recommendedBy = ""
     @State private var showGenres = false
     
+    init(book: Book) {
+        self.book = book
+        _status = State(initialValue: Status(rawValue: book.status)!)
+    }
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text("Status")
-                Spacer()
-                Picker("Status", selection: $status) {
-                    ForEach(Status.allCases) { status in
-                        Text(status.descr).tag(status)
-                    }
-                }
-                .buttonStyle(.bordered)
-            }
-            
+        ScrollView {
             VStack(alignment: .leading) {
-                GroupBox {
-                    LabeledContent {
-                        DatePicker("", selection: $dateAdded, displayedComponents: .date)
-                    } label: {
-                        Text("Date Added")
-                    }
-                    
-                    if status == .inProgress || status == .completed {
-                        LabeledContent {
-                            DatePicker("", selection: $dateStarted, in: dateAdded..., displayedComponents: .date)
-                        } label: {
-                            Text("Date Started")
+                HStack {
+                    Text("Status")
+                    Spacer()
+                    Picker("Status", selection: $status) {
+                        ForEach(Status.allCases) { status in
+                            Text(status.descr).tag(status)
                         }
                     }
-                    
-                    if status == .completed {
-                        LabeledContent {
-                            DatePicker("", selection: $dateCompleted, in: dateStarted..., displayedComponents: .date)
-                        } label: {
-                            Text("Date Completed")
-                        }
-                    }
+                    .buttonStyle(.bordered)
                 }
-                .foregroundStyle(.secondary)
-                .onChange(of: status) { oldValue, newValue in
-                    if !firstView {
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    GroupBox {
+                        LabeledContent {
+                            switch status {
+                            case .onShelf:
+                                DatePicker("", selection: $dateAdded, displayedComponents: .date)
+                            case .inProgress, .completed:
+                                DatePicker("", selection: $dateAdded, in: ...dateAdded, displayedComponents: .date)
+                            }
+                            
+                        } label: {
+                            Text("Date Added")
+                        }
+                        
+                        if status == .inProgress || status == .completed {
+                            LabeledContent {
+                                DatePicker("", selection: $dateStarted, in: dateAdded..., displayedComponents: .date)
+                            } label: {
+                                Text("Date Started")
+                            }
+                        }
+                        
+                        if status == .completed {
+                            LabeledContent {
+                                DatePicker("", selection: $dateCompleted, in: dateStarted..., displayedComponents: .date)
+                            } label: {
+                                Text("Date Completed")
+                            }
+                        }
+                    }
+                    .foregroundStyle(.secondary)
+                    .onChange(of: status) { oldValue, newValue in
                         if newValue == .onShelf {
                             dateStarted = Date.distantPast
                             dateCompleted = Date.distantPast
@@ -76,94 +86,94 @@ struct EditBookView: View {
                             dateCompleted = Date.now
                         }
                     }
-                    firstView = false
-                }
-                Divider()
-                LabeledContent {
-                    RatingsView(maxRating: 5, currentRating: $rating, width: 30)
-                } label: {
-                    Text("Rating")
-                }
-                LabeledContent {
-                    TextField("", text: $title)
-                } label: {
-                    Text("Title").foregroundStyle(.secondary)
-                }
-                LabeledContent {
-                    TextField("", text: $author)
-                } label: {
-                    Text("Author").foregroundStyle(.secondary)
-                }
-                LabeledContent {
-                    TextField("", text: $recommendedBy)
-                } label: {
-                    Text("Recommended By").foregroundStyle(.secondary)
-                }
-                Divider()
-                Text("Comment").foregroundStyle(.secondary)
-                TextEditor(text: $comment)
-                    .padding(5)
-                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color(uiColor: .tertiarySystemFill), lineWidth: 2))
-                if let genres = book.genres {
-                    ViewThatFits {
-                        GenresStackView(genres: genres)
-                        ScrollView(.horizontal, showsIndicators: false) {
+                    Divider()
+                    LabeledContent {
+                        RatingsView(maxRating: 5, currentRating: $rating, width: 30)
+                    } label: {
+                        Text("Rating")
+                    }
+                    LabeledContent {
+                        TextField("", text: $title)
+                    } label: {
+                        Text("Title").foregroundStyle(.secondary)
+                    }
+                    LabeledContent {
+                        TextField("", text: $author)
+                    } label: {
+                        Text("Author").foregroundStyle(.secondary)
+                    }
+                    LabeledContent {
+                        TextField("", text: $recommendedBy)
+                    } label: {
+                        Text("Recommended By").foregroundStyle(.secondary)
+                    }
+                    Divider()
+                    Text("Comment").foregroundStyle(.secondary)
+                    
+                    TextEditor(text: $comment)
+                        .frame(minHeight: 200)
+                        .padding(5)
+                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color(uiColor: .tertiarySystemFill), lineWidth: 2))
+                    if let genres = book.genres {
+                        ViewThatFits {
                             GenresStackView(genres: genres)
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                GenresStackView(genres: genres)
+                            }
                         }
                     }
+                    HStack(alignment: .center, spacing: 10) {
+                        Button("Genres", systemImage: "bookmark.fill") {
+                            showGenres.toggle()
+                        }
+                        .sheet(isPresented: $showGenres) {
+                            GenresView(book: book)
+                        }
+                        
+                        NavigationLink {
+                            QuoteListView(book: book)
+                        } label: {
+                            let count = book.quotes?.count ?? 0
+                            Label("\(count) Quotes", systemImage: "quote.opening")
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding()
                 }
-                HStack(alignment: .center, spacing: 10) {
-                    Button("Genres", systemImage: "bookmark.fill") {
-                        showGenres.toggle()
-                    }
-                    .sheet(isPresented: $showGenres) {
-                        GenresView(book: book)
-                    }
-                    
-                    NavigationLink {
-                        QuoteListView(book: book)
-                    } label: {
-                        let count = book.quotes?.count ?? 0
-                        Label("^[\(count) Quotes](inflect: true)", systemImage: "quote.opening")
-                    }
-                }
-                .buttonStyle(.bordered)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.horizontal)
+                .textFieldStyle(.roundedBorder)
             }
-            .textFieldStyle(.roundedBorder)
-        }
-        .padding()
-        .navigationTitle(title)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            if changed {
-                Button("Update") {
-                    //update the context
-                    book.status = status.rawValue
-                    book.rating  = rating
-                    book.title = title
-                    book.author = author
-                    book.comment = comment
-                    book.dateAdded = dateAdded
-                    book.dateStarted = dateStarted
-                    book.dateCompleted = dateCompleted
-                    book.recommendedBy = recommendedBy
-                    dismiss()
+            .padding()
+            .navigationTitle(title)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                if changed {
+                    Button("Update") {
+                        //update the context
+                        book.status = status.rawValue
+                        book.rating  = rating
+                        book.title = title
+                        book.author = author
+                        book.comment = comment
+                        book.dateAdded = dateAdded
+                        book.dateStarted = dateStarted
+                        book.dateCompleted = dateCompleted
+                        book.recommendedBy = recommendedBy
+                        dismiss()
+                    }
+                    .buttonStyle(.borderless)
                 }
-                .buttonStyle(.borderless)
             }
-        }
-        .onAppear {
-            status = Status(rawValue: book.status)!
-            rating = book.rating
-            title = book.title
-            author = book.author
-            comment = book.comment
-            dateAdded = book.dateAdded
-            dateStarted = book.dateStarted
-            dateCompleted = book.dateCompleted
-            recommendedBy = book.recommendedBy
+            .onAppear {
+                rating = book.rating
+                title = book.title
+                author = book.author
+                comment = book.comment
+                dateAdded = book.dateAdded
+                dateStarted = book.dateStarted
+                dateCompleted = book.dateCompleted
+                recommendedBy = book.recommendedBy
+            }
         }
     }
     
